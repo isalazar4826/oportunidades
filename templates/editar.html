@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Oportunidad</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1>Editar Oportunidad</h1>
+        <form method="POST">
+            <div class="form-group">
+                <label for="nombre">Nombre</label>
+                <input type="text" class="form-control" id="nombre" name="nombre" value="{{ oportunidad.nombre }}" readonly>
+            </div>
+            <div class="form-group">
+                <label for="cliente">Cliente</label>
+                <input type="text" class="form-control" id="cliente" name="cliente" value="{{ oportunidad.cliente }}" readonly>
+            </div>
+            <div class="form-group">
+                <label for="vendedor">Vendedor</label>
+                <input type="text" class="form-control" id="vendedor" name="vendedor" value="{{ oportunidad.vendedor }}" readonly>
+            </div>
+            <div class="form-group">
+                <label for="producto">Producto</label>
+                <input type="text" class="form-control" id="producto" name="producto" value="{{ oportunidad.producto }}" readonly>
+            </div>
+            <div class="form-group">
+                <label for="fecha_solicitud">Fecha de Solicitud</label>
+                <input type="date" class="form-control" id="fecha_solicitud" name="fecha_solicitud" value="{{ oportunidad.fecha_solicitud.strftime('%Y-%m-%d') }}" readonly>
+            </div>
+            <div class="form-group">
+                <label for="fecha_entrega">Fecha de Entrega</label>
+                <input type="date" class="form-control" id="fecha_entrega" name="fecha_entrega" value="{{ oportunidad.fecha_entrega.strftime('%Y-%m-%d') }}" readonly>
+            </div>
+            <div class="form-group">
+                <label for="estatus_comercial">Estatus Comercial</label>
+                <input type="text" class="form-control" id="estatus_comercial" name="estatus_comercial" value="{{ oportunidad.estatus }}" readonly>
+            </div>
+            <div class="form-group">
+                <label for="descripcion_estatus">Descripción del Estatus Comercial</label>
+                <textarea class="form-control" id="descripcion_estatus" name="descripcion_estatus">{{ oportunidad.descripcion_estatus }}</textarea>
+            </div>
+            <div class="form-group">
+                <label for="comentarios">Comentarios</label>
+                <textarea class="form-control" id="comentarios" name="comentarios">{{ oportunidad.comentarios }}</textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+            <a href="{{ url_for('ver_oportunidades') }}" class="btn btn-secondary">Cancelar</a>
+        </form>
+    </div>
+</body>
+</html>
