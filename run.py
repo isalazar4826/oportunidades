@@ -35,7 +35,7 @@ class Opportunity(db.Model):
     estatus = db.Column(db.String(50), nullable=False, default='En Proceso')
     descripcion_estatus = db.Column(db.String(500), nullable=True)
     comentarios = db.Column(db.String(500), nullable=True)
-    deal_id = db.Column(db.String(100), nullable=True)  # Añadir esta línea
+    deal_id = db.Column(db.String(100), nullable=True)
 
 @app.route('/')
 def home():
@@ -76,7 +76,7 @@ def registro_oportunidades():
         estatus = request.form['estatus_comercial']
         descripcion_estatus = request.form['descripcion_estatus']
         comentarios = request.form['comentarios']
-        deal_id = request.form['deal_id']  # Asegúrate de tener este campo en el formulario
+        deal_id = request.form['deal_id']
 
         nueva_oportunidad = Opportunity(
             user_id=user_id,
@@ -89,7 +89,7 @@ def registro_oportunidades():
             estatus=estatus,
             descripcion_estatus=descripcion_estatus,
             comentarios=comentarios,
-            deal_id=deal_id  # Añadir esta línea
+            deal_id=deal_id
         )
         db.session.add(nueva_oportunidad)
         db.session.commit()
@@ -111,6 +111,7 @@ def ver_oportunidades():
             oportunidad.fecha_creacion = oportunidad.fecha_creacion.replace(tzinfo=pytz.utc).astimezone(cdmx_tz)
 
     return render_template('ver_oportunidades.html', oportunidades=oportunidades)
+
 @app.route('/editar/<int:id>', methods=['GET', 'POST'])
 def editar_oportunidad(id):
     if 'user_id' not in session:
@@ -167,7 +168,7 @@ def exportar_oportunidades():
         headers={"Content-Disposition": "attachment;filename=oportunidades.csv"}
     )
 
-@app.route('/logout')
+@app.route('/logout', methods=['POST'])
 def logout():
     session.pop('user_id', None)
     return redirect(url_for('login'))
@@ -180,7 +181,7 @@ if __name__ == '__main__':
         db.create_all()
 
         if not User.query.filter_by(username="testuser").first():
-            testuser = User(username="testuser", password=generate_password_hash("testpassword"))
+            testuser = User(username="ivan", password=generate_password_hash("ivan123"))
             db.session.add(testuser)
             db.session.commit()
 
