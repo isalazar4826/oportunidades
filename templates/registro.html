@@ -3,76 +3,68 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro de Oportunidades</title>
+    <title>Registro de Oportunidades - Horizontal</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
-    <h1>Registrar Oportunidad</h1>
-    <form method="POST">
-        <label for="nombre">Nombre de la Oportunidad:</label>
-        <input type="text" id="nombre" name="nombre" required>
-        <br>
-        
-        <label for="cliente">Cliente:</label>
-        <input type="text" id="cliente" name="cliente" required>
-        <br>
-        
-        <label for="vendedor">Vendedor:</label>
-        <select id="vendedor" name="vendedor" required>
-            {% for vendedor in vendedores %}
-            <option value="{{ vendedor }}">{{ vendedor }}</option>
-            {% endfor %}
-        </select>
-        <br>
-        
-        <label for="producto">Producto/Equipo:</label>
-        <input type="text" id="producto" name="producto" required>
-        <br>
-        
-        <label for="fecha_solicitud">Fecha de Solicitud:</label>
-        <input type="date" id="fecha_solicitud" name="fecha_solicitud" required>
-        <br>
-        
-        <label for="fecha_entrega">Fecha de Entrega:</label>
-        <input type="date" id="fecha_entrega" name="fecha_entrega" required>
-        <br>
-        
-        <!-- Estatus Comercial -->
-        <label for="estatus_comercial">Estatus Comercial:</label>
-        <select id="estatus_comercial" name="estatus_comercial" required>
-            <option value="Cancelado">Cancelado</option>
-            <option value="En Proceso">En Proceso</option>
-            <option value="Entregado">Entregado</option>
-            <option value="Entregado SOW">Entregado SOW</option>
-            <option value="Pausado por el Cliente">Pausado por el Cliente</option>
-            <option value="Propuesta enviada">Propuesta enviada</option>
-        </select>
-        <br>
-        
-        <!-- Descripción del Estatus Comercial -->
-        <label for="descripcion_estatus">Descripción del Estatus Comercial:</label>
-        <textarea id="descripcion_estatus" name="descripcion_estatus" rows="4" cols="50" placeholder="Descripción opcional sobre el estatus comercial"></textarea>
-        <br>
-        
-        <!-- Comentarios -->
-        <label for="comentarios">Comentarios:</label>
-        <textarea id="comentarios" name="comentarios" rows="4" cols="50" placeholder="Comentarios adicionales"></textarea>
-        <br>
-
-        <!-- DEAL Id -->
-        <label for="deal_id">DEAL Id:</label>
-        <input type="text" id="deal_id" name="deal_id" placeholder="Identificador del Deal">
-        <br>
-
-        <button type="submit">Registrar</button>
-    </form>
-
-    <!-- Botón para ver oportunidades registradas -->
-    <br><br>
-    <a href="{{ url_for('ver_oportunidades') }}">
-        <button>Ver Oportunidades Registradas</button>
-    </a>
-
-    <br><br>
-    <a href="/logout">Cerrar Sesión</a>
+    <div class="container mt-5">
+        <h1>Registro de Oportunidades</h1>
+        <form method="POST">
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="nombre">Nombre</label>
+                    <input type="text" class="form-control" id="nombre" name="nombre" required>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="cliente">Cliente</label>
+                    <input type="text" class="form-control" id="cliente" name="cliente" required>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="vendedor">Vendedor</label>
+                    <select class="form-control" id="vendedor" name="vendedor" required>
+                        {% for vendedor in vendedores %}
+                        <option value="{{ vendedor }}">{{ vendedor }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="producto">Producto</label>
+                    <input type="text" class="form-control" id="producto" name="producto" required>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="fecha_solicitud">Fecha de Solicitud</label>
+                    <input type="date" class="form-control" id="fecha_solicitud" name="fecha_solicitud" required>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="fecha_entrega">Fecha de Entrega</label>
+                    <input type="date" class="form-control" id="fecha_entrega" name="fecha_entrega" required>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="estatus_comercial">Estatus Comercial</label>
+                    <input type="text" class="form-control" id="estatus_comercial" name="estatus_comercial" required>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="descripcion_estatus">Descripción del Estatus Comercial</label>
+                    <textarea class="form-control" id="descripcion_estatus" name="descripcion_estatus"></textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="comentarios">Comentarios</label>
+                <textarea class="form-control" id="comentarios" name="comentarios"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="deal_id">DEAL ID:</label>
+                <input type="text" class="form-control" id="deal_id" name="deal_id">
+            </div>
+            <button type="submit" class="btn btn-primary mt-3">Registrar</button>
+            <a href="{{ url_for('ver_oportunidades') }}" class="btn btn-secondary mt-3 ml-3">Ver Oportuidades</a>
+        </form>
+    </div>
 </body>
 </html>
