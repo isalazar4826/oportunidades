@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oportunidades Registradas</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-5">Oportunidades Registradas</h1>
+        <a href="{{ url_for('registro_oportunidades') }}" class="btn btn-primary mt-3">Registrar nueva oportunidad</a>
+
+        <!-- Botón para exportar a CSV -->
+        <a href="{{ url_for('exportar_oportunidades') }}" class="btn btn-success mt-3 ml-3">Exportar</a>
+
+        <table class="table table-striped mt-4">
+            <thead>
+                <tr>
+                    <th>Fecha Creación</th> <!-- Mover esta columna al principio -->
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Cliente</th>
+                    <th>Vendedor</th>
+                    <th>Producto</th>
+                    <th>Fecha Solicitud</th>
+                    <th>Fecha Entrega</th>
+                    <th>Estatus Preventa</th>
+                    <th>Descripción del Estatus Comercial</th>
+                    <th>Comentarios</th>  <!-- Nueva columna -->
+                    <th>DEAL Id</th>      <!-- Nueva columna -->
+                </tr>
+            </thead>
+            <tbody>
+                {% for oportunidad in oportunidades %}
+                    <tr>
+                        <td>{{ oportunidad.fecha_creacion.strftime('%Y-%m-%d %H:%M:%S') }}</td> <!-- Formato de fecha con hora -->
+                        <td>{{ oportunidad.id }}</td>
+                        <td>{{ oportunidad.nombre }}</td>
+                        <td>{{ oportunidad.cliente }}</td>
+                        <td>{{ oportunidad.vendedor }}</td>
+                        <td>{{ oportunidad.producto }}</td>
+                        <td>{{ oportunidad.fecha_solicitud.strftime('%Y-%m-%d') }}</td>
+                        <td>{{ oportunidad.fecha_entrega.strftime('%Y-%m-%d') }}</td>
+                        <td>{{ oportunidad.estatus }}</td>
+                        <td>{{ oportunidad.descripcion_estatus }}</td> <!-- Mostrar estatus de la oportunidad -->
+                        <td>{{ oportunidad.comentarios }}</td>  <!-- Mostrar comentarios -->
+                        <td>{{ oportunidad.deal_id }}</td>      <!-- Mostrar DEAL Id -->
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="12" class="text-center">No hay oportunidades registradas.</td> <!-- Ajusta el colspan -->
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
