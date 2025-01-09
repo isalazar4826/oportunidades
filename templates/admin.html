@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Administrador</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-5">Panel de Administrador - Todas las Oportunidades 2025</h1>
+        
+        <a href="{{ url_for('registro_oportunidades') }}" class="btn btn-primary mt-3">Registrar nueva oportunidad</a>
+        <a href="{{ url_for('exportar_oportunidades') }}" class="btn btn-success mt-3 ml-3">Exportar</a>
+        <a href="{{ url_for('registro_oportunidades') }}" class="btn btn-secondary mt-3 ml-3">Regresar</a>
+
+        <table class="table table-striped mt-4">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Fecha Creación</th>
+                    <th>Nombre Preventa</th>
+                    <th>Nombre Oportunidad</th>
+                    <th>Cliente</th>
+                    <th>Vendedor</th>
+                    <th>Producto</th>
+                    <th>Fecha Solicitud</th>
+                    <th>Fecha Entrega</th>
+                    <th>Estatus Preventa</th>
+                    <th>Descripción del Estatus Comercial</th>
+                    <th>Comentarios</th>
+                    <th>DEAL Id</th>
+                    
+                </tr>
+            </thead>
+            <tbody>
+                {% for oportunidad in opportunities %}
+                <tr>
+                    <td>{{ oportunidad.id }}</td>
+                    <td>{{ oportunidad.fecha_creacion.strftime('%Y-%m-%d %H:%M:%S') }}</td>
+                    <td>{{ oportunidad.user.username }}</td>
+                    <td>{{ oportunidad.nombre }}</td>
+                    <td>{{ oportunidad.cliente }}</td>
+                    <td>{{ oportunidad.vendedor }}</td>
+                    <td>{{ oportunidad.producto }}</td>
+                    <td>{{ oportunidad.fecha_solicitud.strftime('%Y-%m-%d') }}</td>
+                    <td>{{ oportunidad.fecha_entrega.strftime('%Y-%m-%d') }}</td>
+                    <td>{{ oportunidad.estatus }}</td>
+                    <td>{{ oportunidad.descripcion_estatus }}</td>
+                    <td>{{ oportunidad.comentarios }}</td>
+                    <td>{{ oportunidad.deal_id }}</td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="9" class="text-center">No hay oportunidades disponibles.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
