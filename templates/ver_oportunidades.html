@@ -6,65 +6,96 @@
     <title>Oportunidades Registradas 2025</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        /* Cambia el color del botón de detalles */
+        .btn-warning {
+            background-color: #ffc107;
+            border: none;
+        }
+
+        .btn-warning i {
+            color: white;
+        }
+
+        /* Centra y estiliza la tabla */
+        .table {
+            margin-top: 20px;
+        }
+
+        .table th, .table td {
+            vertical-align: middle;
+            text-align: center;
+        }
+
+        .table-bordered th {
+            background-color: #f8f9fa;
+            font-weight: bold;
+        }
+
+        .table-hover tbody tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        /* Margen entre botones */
+        .btn {
+            margin-right: 10px;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
         <h1 class="mt-5">Oportunidades Registradas 2025</h1>
-        <a href="{{ url_for('registro_oportunidades') }}" class="btn btn-primary mt-3">Registrar nueva oportunidad</a>
 
-        <!-- Botón para exportar a CSV -->
-        <a href="{{ url_for('exportar_oportunidades') }}" class="btn btn-success mt-3 ml-3">Exportar</a>
+        <!-- Botones de acción -->
+        <div class="d-flex justify-content-start mt-3">
+            <a href="{{ url_for('registro_oportunidades') }}" class="btn btn-primary">Registrar nueva oportunidad</a>
+            <a href="{{ url_for('exportar_oportunidades') }}" class="btn btn-success">Exportar</a>
+            <a href="{{ url_for('registro_oportunidades') }}" class="btn btn-secondary">Regresar</a>
+        </div>
 
-        <!-- Botón para regresar a la página de registro -->
-        <a href="{{ url_for('registro_oportunidades') }}" class="btn btn-secondary mt-3 ml-3">Regresar</a>
-
-        <table class="table table-striped mt-4">
-            <thead>
-                <tr>
-                    <th>Fecha Creación</th>
-                    <th>ID</th>
-                    <th>Nombre</th>
-                    <th>Cliente</th>
-                    <th>Vendedor</th>
-                    <th>Producto</th>
-                    <th>Fecha Solicitud</th>
-                    <th>Fecha Entrega</th>
-                    <th>Estatus Preventa</th>
-                    <th>Descripción del Estatus Comercial</th>
-                    <th>Comentarios</th>
-                    <th>DEAL Id</th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for oportunidad in oportunidades %}
+        <!-- Tabla de oportunidades -->
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover text-center mt-4">
+                <thead class="thead-light">
                     <tr>
-                        <td>{{ oportunidad.fecha_creacion.strftime('%Y-%m-%d %H:%M:%S') }}</td>
-                        <td>{{ oportunidad.id }}</td>
-                        <td>{{ oportunidad.nombre }}</td>
-                        <td>{{ oportunidad.cliente }}</td>
-                        <td>{{ oportunidad.vendedor }}</td>
-                        <td>{{ oportunidad.producto }}</td>
-                        <td>{{ oportunidad.fecha_solicitud.strftime('%Y-%m-%d') }}</td>
-                        <td>{{ oportunidad.fecha_entrega.strftime('%Y-%m-%d') }}</td>
-                        <td>{{ oportunidad.estatus }}</td>
-                        <td>{{ oportunidad.descripcion_estatus }}</td>
-                        <td>{{ oportunidad.comentarios }}</td>
-                        <td>{{ oportunidad.deal_id }}</td>
-                        <td>
-                            <!-- Enlace de edición con ícono de lápiz -->
-                            <a href="{{ url_for('editar_oportunidad', id=oportunidad.id) }}" class="btn btn-warning btn-sm">
-                                <i class="fas fa-edit"></i>
-                            </a>
-                        </td>
+                        <th>Fecha Creación</th>
+                        <th>ID</th>
+                        <th>Nombre Oportunidad</th>
+                        <th>Cliente</th>
+                        <th>Vendedor</th>
+                        <th>Producto</th>
+                        <th>Detalles</th>
                     </tr>
-                {% else %}
-                    <tr>
-                        <td colspan="13" class="text-center">No hay oportunidades registradas.</td> <!-- Ajusta el colspan -->
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    {% for oportunidad in oportunidades %}
+                        <tr>
+                            <td>{{ oportunidad.fecha_creacion.strftime('%Y-%m-%d %H:%M:%S') }}</td>
+                            <td>{{ oportunidad.id }}</td>
+                            <td>{{ oportunidad.nombre }}</td>
+                            <td>{{ oportunidad.cliente }}</td>
+                            <td>{{ oportunidad.vendedor }}</td>
+                            <td>{{ oportunidad.producto }}</td>
+                            <td>
+                                <!-- Botón de edición -->
+                                <a href="{{ url_for('detalles_oportunidad', id=oportunidad.id) }}" class="btn btn-warning btn-sm text-white">
+                                    <i class="fas fa-pen"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="7" class="text-center">No hay oportunidades registradas.</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
     </div>
+
+    <!-- Scripts de Bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
